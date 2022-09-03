@@ -2,14 +2,14 @@ package database
 
 import (
 	"log"
-	"os"
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
 func ConnectDB() *sqlx.DB {
-	db, err := sqlx.Connect("postgres", os.Getenv("DSN"))
+	DSN := "postgresql://vijay:zmxmcmvbn@localhost:5432/echo_rest?sslmode=disable"
+	db, err := sqlx.Connect("postgres", DSN)
 	if err != nil {
 		log.Fatalln(err)
 	}

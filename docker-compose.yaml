@@ -1,17 +1,6 @@
 version: '3'
 services:
 
-  project:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - "8080:8080"
-    deploy:
-      mode: replicated
-      replicas: 1
-
 
 
 
@@ -22,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=zmxmcmvbn
       - POSTGRES_DB=echo_rest
     ports:
-      - "5433:5432"
+      - "5432:5432"
     restart: always
     deploy:
       mode: replicated
@@ -32,3 +21,15 @@ services:
 
 
 
+  project:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      - DSN=${DSN}
