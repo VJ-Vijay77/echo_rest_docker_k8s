@@ -20,3 +20,9 @@ stop:
 	-pkill -SIGTERM -f "./main"
 	rm main
 
+migrateup:
+	migrate -path database/migration -database "postgresql://vijay:zmxmcmvbn@localhost:5432/echo_rest?sslmode=disable" -verbose up
+
+migratedown:
+	migrate -path database/migration -database "postgresql://vijay:zmxmcmvbn@localhost:5432/echo_rest?sslmode=disable" -verbose down
+		
