@@ -13,7 +13,7 @@ func main() {
 	if err != nil {
 		log.Println("no env")
 	}
-	Port := "8080"
+	Port := "0.0.0.0:8080"
 	e := echo.New()
 	routers.Routers(e)
 
