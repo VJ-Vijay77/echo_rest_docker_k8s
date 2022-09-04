@@ -14,6 +14,7 @@ WORKDIR /app
 COPY --from=builder /app/main .
 COPY --from=builder /app/migrate.linux-amd64 ./migrate
 COPY .env .
+COPY wait-for.sh .
 COPY start.sh .
 COPY database/migration ./migration
 EXPOSE 8080
