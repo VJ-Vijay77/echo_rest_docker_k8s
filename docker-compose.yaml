@@ -18,16 +18,17 @@ services:
       replicas: 1
     volumes:
       - ./database/postgres/:/var/lib/postgresql
-
-
-
-  # app:
-  #   build: 
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - postgres
     
+
+
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    links:
+      - "postgres:database"
