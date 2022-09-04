@@ -8,10 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type H struct {
-	Status        string
-	Rows_Affected int64
-}
+
 
 func Home(c echo.Context) error {
 
@@ -33,10 +30,11 @@ func AddUser(c echo.Context) error {
 		log.Println("database operation declined")
 	}
 	res, _ := result.RowsAffected()
+	last,_ := result.LastInsertId()
 
-	return c.JSON(200, H{
-		Status:        "Successfull",
-		Rows_Affected: res,
+	return c.JSON(200, map[string]interface{}{
+		"rows affected":res,
+		"last":last,
 	})
 }
 
@@ -93,5 +91,20 @@ func UpdateUser(c echo.Context) error {
 }
 
 func DeleteUser(c echo.Context) error {
-	return nil
+	db := database.ConnectDB()
+	name := c.Param("id")
+
+	res,err := db.Exec("DELETE FROM person WHERE firstname=$1",name)
+	if err != nil{
+		return c.String(400,"Declined")
+	}
+	count,_ := res.RowsAffected()
+	last,_ := res.LastInsertId()
+
+
+	return c.JSON(200,map[string]interface{}{
+		"Rows affected":count,
+		"last":last,
+		"Status":"Successful",
+	})
 }
