@@ -7,6 +7,6 @@ import (
 )
 func SchemaInitialise() {
 	db := database.ConnectDB()
-	db.MustExec(models.UserTable) 
+	db.Exec(models.UserTable) 
 	
 }

@@ -13,4 +13,10 @@ down:
 	
 	
 server:
-	go run main.go
+	go build -o main .
+	./main
+
+stop:
+	-pkill -SIGTERM -f "./main"
+	rm main
+
