@@ -12,4 +12,5 @@ down:
 	docker compose down
 	
 	
-
+server:
+	go run main.go
