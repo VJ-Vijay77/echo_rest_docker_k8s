@@ -1,0 +1,16 @@
+name: Deploy to production
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: echo "Hello"
+    
+
